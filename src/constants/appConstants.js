@@ -10,3 +10,7 @@ export const singUpInitialValues = {
   username: "",
   email: "",
 };
+
+export const categoryInitialValues = {
+  categoryName: "",
+};

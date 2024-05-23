@@ -7,6 +7,10 @@ const authValidation = {
   validEmail: "Provide a valid email",
 };
 
+const categoryValidation = {
+  name: "Category name is required",
+};
+
 // Sign up validation schema
 export const signUpValidationSchema = yup.object().shape({
   username: yup.string().required(authValidation.username),
@@ -23,4 +27,8 @@ export const signInValidationSchema = yup.object().shape({
     .required(authValidation.email)
     .email(authValidation.validEmail),
   password: yup.string().required(authValidation.password),
+});
+
+export const categoryValidationSchema = yup.object().shape({
+  categoryName: yup.string().required(categoryValidation.name).matches(),
 });
