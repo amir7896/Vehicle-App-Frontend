@@ -9,7 +9,7 @@ import { categoryValidationSchema } from "../../../../utils/validations";
 import CategoryApi from "../../../../services/apis/Category.Api";
 
 const Modal = (props) => {
-  const { setIsOpen, isOpen, categoryID, setCategoryID, reftch } = props;
+  const { setIsOpen, isOpen, categoryID, setCategoryID, refetch } = props;
 
   // Get single category api call
   const { data: singleCategory } = useQuery(
@@ -46,7 +46,7 @@ const Modal = (props) => {
       onSuccess: (res) => {
         if (res.success) {
           toast.success(res.message);
-          reftch();
+          refetch();
           setIsOpen(false);
           setCategoryID(null);
           formik.resetForm();
@@ -64,6 +64,7 @@ const Modal = (props) => {
 
   const handelClose = (e) => {
     e.preventDefault();
+    setCategoryID(null);
     setIsOpen(false);
     formik.resetForm();
   };

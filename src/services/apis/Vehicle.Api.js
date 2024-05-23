@@ -4,6 +4,7 @@ import {
   DELETE_VEHICLE,
   GET_SINGLE_VEHICLE,
   GET_VEHICLES,
+  TOTAL_VEHICLES,
   UPDATE_VEHICLE,
 } from "../apiConstants";
 
@@ -19,6 +20,21 @@ class VehicleApi {
   async getVehicles() {
     try {
       const response = await api.get(GET_VEHICLES);
+      const { success, data } = response.data;
+      if (success) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+
+  // Get total vehicles
+  async getTotalVehicles() {
+    try {
+      const response = await api.get(TOTAL_VEHICLES);
       const { success, data } = response.data;
       if (success) {
         return data;

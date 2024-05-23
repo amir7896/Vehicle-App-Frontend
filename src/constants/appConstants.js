@@ -14,3 +14,11 @@ export const singUpInitialValues = {
 export const categoryInitialValues = {
   categoryName: "",
 };
+
+export const vehicleInitialValues = {
+  category: "",
+  model: "",
+  color: "",
+  make: "",
+  registrationNo: "",
+};

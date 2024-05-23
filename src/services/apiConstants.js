@@ -14,6 +14,7 @@ export const DELETE_CATEGORY = `${CATEGORY}/delete`;
 // Vehicle apis constants
 export const VEHICLE = "vehicle";
 export const GET_VEHICLES = `${VEHICLE}/list`;
+export const TOTAL_VEHICLES = `${VEHICLE}/total`;
 export const CREATE_VEHICLE = `${VEHICLE}/create`;
 export const GET_SINGLE_VEHICLE = `${VEHICLE}`;
 export const UPDATE_VEHICLE = `${VEHICLE}/update`;

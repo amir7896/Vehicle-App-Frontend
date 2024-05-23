@@ -11,6 +11,13 @@ const categoryValidation = {
   name: "Category name is required",
 };
 
+const vehicleValidation = {
+  color: "Color is required",
+  make: "Make is required",
+  model: "Model is required",
+  registrationNo: "Registration no is required",
+};
+
 // Sign up validation schema
 export const signUpValidationSchema = yup.object().shape({
   username: yup.string().required(authValidation.username),
@@ -31,4 +38,11 @@ export const signInValidationSchema = yup.object().shape({
 
 export const categoryValidationSchema = yup.object().shape({
   categoryName: yup.string().required(categoryValidation.name).matches(),
+});
+
+export const vehicleValidationSchema = yup.object().shape({
+  color: yup.string().required(vehicleValidation.color),
+  make: yup.string().required(vehicleValidation.make),
+  model: yup.string().required(vehicleValidation.model),
+  registrationNo: yup.string().required(vehicleValidation.registrationNo),
 });

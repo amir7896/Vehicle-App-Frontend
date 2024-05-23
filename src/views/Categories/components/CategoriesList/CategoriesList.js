@@ -82,9 +82,9 @@ const CategoriesList = ({ data, refetch }) => {
   ];
 
   return (
-    <div>
+    <div className="min-h-screen p-4 flex flex-col">
       {/* Add Category Button */}
-      <div className="flex justify-end mt-4 mr-4">
+      <div className="flex justify-end mb-4">
         <button
           className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded uppercase flex items-center space-x-2"
           onClick={openModal}
@@ -95,15 +95,13 @@ const CategoriesList = ({ data, refetch }) => {
       </div>
       {/* Categories list table */}
       {data && data.length > 0 && (
-        <div className="flex justify-center mt-10">
-          <div className="w-full max-w-4xl">
-            <DataTable
-              title="Categories"
-              columns={columns}
-              data={data}
-              pagination
-            />
-          </div>
+        <div className="flex-grow">
+          <DataTable
+            title="Categories"
+            columns={columns}
+            data={data}
+            pagination
+          />
         </div>
       )}
       {/* Create and update category modal */}
@@ -112,15 +110,15 @@ const CategoriesList = ({ data, refetch }) => {
         isOpen={isModalOpen}
         categoryID={categoryID}
         setCategoryID={setCategoryID}
-        reftch={refetch}
+        refetch={refetch}
       />
       {/* Delete Modal */}
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
         onConfirm={handleConfirmDelete}
-        title="Are you sure to delete category ?"
-        heading="Delete category"
+        title="Are you sure you want to delete this category?"
+        heading="Delete Category"
       />
     </div>
   );

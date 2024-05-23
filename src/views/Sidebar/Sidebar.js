@@ -30,7 +30,7 @@ const Sidebar = () => {
     <div
       className={`fixed lg:relative bg-gray-800 h-full w-64 lg:w-48 flex flex-col transform ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-      } lg:translate-x-0 transition-transform duration-200 ease-in-out`}
+      } lg:translate-x-0 transition-transform duration-200 ease-in-out z-50`}
     >
       <div className="lg:hidden p-4 text-right">
         <button
