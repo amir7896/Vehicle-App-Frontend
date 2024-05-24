@@ -26,12 +26,14 @@ const Login = () => {
     onError: (error) => toast.error(error.message),
   });
 
+  // Formik
   const formik = useFormik({
     initialValues: loginInitialValues,
     validationSchema: signInValidationSchema,
     onSubmit: (values) => handleSubmit(values),
   });
 
+  // Handle submit method
   const handleSubmit = (values) => {
     signinUser(values);
   };
@@ -45,11 +47,11 @@ const Login = () => {
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form onSubmit={formik.handleSubmit}>
-          {/* Email addresss */}
+          {/* Email addresss input */}
           <div>
             <label
-              for="email"
               className="block text-sm font-medium leading-6 text-gray-900"
+              htmlFor="name"
             >
               Email address
             </label>
@@ -57,6 +59,7 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
+                id="email"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-3"
                 value={formik.values.email}
                 onChange={formik.handleChange}
@@ -69,12 +72,12 @@ const Login = () => {
               ) : null}
             </div>
           </div>
-          {/* Password */}
+          {/* Password  input*/}
           <div>
             <div className="flex items-center justify-between mt-2">
               <label
-                for="password"
                 className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="password"
               >
                 Password
               </label>
@@ -83,6 +86,7 @@ const Login = () => {
               <input
                 type="password"
                 name="password"
+                id="password"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-3"
                 value={formik.values.password}
                 onChange={formik.handleChange}
@@ -96,7 +100,6 @@ const Login = () => {
             </div>
           </div>
           {/* Submit button */}
-
           <div className="mt-3">
             <button
               type="submit"

@@ -22,6 +22,10 @@ const Sidebar = () => {
     toast.success("Logout successfully");
   };
 
+  const handleLinkClick = () => {
+    setIsSidebarOpen(false);
+  };
+
   const linkClasses =
     "text-white hover:text-blue-500 hover:bg-gray-700 px-4 py-2 block flex items-center mb-4";
   const activeLinkClasses = "bg-blue-500 text-white";
@@ -53,6 +57,7 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 isActive ? `${linkClasses} ${activeLinkClasses}` : linkClasses
               }
+              onClick={handleLinkClick}
             >
               <FaChartLine className="mr-2" />
               Dashboard
@@ -69,6 +74,7 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 isActive ? `${linkClasses} ${activeLinkClasses}` : linkClasses
               }
+              onClick={handleLinkClick}
             >
               <FaClipboard className="mr-2" />
               Categories
@@ -85,6 +91,7 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 isActive ? `${linkClasses} ${activeLinkClasses}` : linkClasses
               }
+              onClick={handleLinkClick}
             >
               <FaCar className="mr-2" />
               Vehicles

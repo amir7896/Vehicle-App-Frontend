@@ -1,5 +1,5 @@
 import React from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 const DeleteModal = ({ isOpen, onClose, onConfirm, heading, title }) => {
   return (
@@ -13,6 +13,7 @@ const DeleteModal = ({ isOpen, onClose, onConfirm, heading, title }) => {
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
         <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+          {/* Heading */}
           <div className="flex justify-between p-4 border-b">
             <h3 className="text-lg font-semibold uppercase">{heading}</h3>
             <button
@@ -22,21 +23,25 @@ const DeleteModal = ({ isOpen, onClose, onConfirm, heading, title }) => {
               <FaTimes />
             </button>
           </div>
+          {/* Title */}
           <div className="p-4">
             <p>{title}</p>
           </div>
-          <div className="flex justify-end p-4 border-t">
+          {/* Buttons */}
+          <div className="flex justify-end p-4 border-t space-x-2">
             <button
               onClick={onClose}
-              className="mr-2 px-4 py-2 rounded bg-gray-500 text-white hover:bg-gray-600 focus:outline-none"
+              className="flex items-center space-x-2 px-4 py-2 rounded bg-gray-500 text-white hover:bg-gray-600 focus:outline-none uppercase"
             >
-              No
+              <FaTimes />
+              <span>No</span>
             </button>
             <button
               onClick={onConfirm}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none"
+              className="flex items-center space-x-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none uppercase"
             >
-              Yes
+              <FaCheck />
+              <span>Yes</span>
             </button>
           </div>
         </div>

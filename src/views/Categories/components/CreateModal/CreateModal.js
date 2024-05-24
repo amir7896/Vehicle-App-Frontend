@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaSave, FaTimes } from "react-icons/fa";
 import { useFormik } from "formik";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
@@ -20,6 +20,7 @@ const Modal = (props) => {
       keepPreviousData: true,
     }
   );
+
   // Set form fields if update category ..
   useEffect(() => {
     if (singleCategory !== undefined && categoryID !== null) {
@@ -27,6 +28,7 @@ const Modal = (props) => {
     }
   }, [singleCategory]);
 
+  // Formik
   const formik = useFormik({
     initialValues: categoryInitialValues,
     validationSchema: categoryValidationSchema,
@@ -58,10 +60,12 @@ const Modal = (props) => {
     }
   );
 
+  // Handle submit
   const handleSubmit = (values) => {
     categories(values);
   };
 
+  // Handle close dialog
   const handelClose = (e) => {
     e.preventDefault();
     setCategoryID(null);
@@ -92,10 +96,18 @@ const Modal = (props) => {
             </button>
           </div>
           <form onSubmit={formik.handleSubmit}>
+            {/* Category input */}
             <div className="p-4">
+              <label
+                className="block text-sm font-medium leading-6 text-gray-900 mb-2"
+                htmlFor="categoryName"
+              >
+                Category name
+              </label>
               <input
                 type="text"
                 name="categoryName"
+                id="categoryName"
                 placeholder="Enter category name"
                 className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
                 value={formik.values.categoryName}
@@ -108,18 +120,22 @@ const Modal = (props) => {
                 </div>
               ) : null}
             </div>
-            <div className="flex justify-end p-4 border-t">
+            {/* Buttons  */}
+            <div className="flex justify-end space-x-4 m-4 ">
               <button
+                type="button"
                 onClick={handelClose}
-                className="mr-2 px-4 py-2 rounded text-gray-600 hover:text-gray-800 focus:outline-none"
+                className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded flex items-center space-x-2 uppercase"
               >
-                Cancel
+                <FaTimes />
+                <span>Cancel</span>
               </button>
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
+                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded flex items-center space-x-2 uppercase"
               >
-                Save
+                <FaSave />
+                <span>Save</span>
               </button>
             </div>
           </form>

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import { FaSave, FaTimes } from "react-icons/fa";
 
 import { vehicleValidationSchema } from "../../utils/validations";
 import { vehicleInitialValues } from "../../constants/appConstants";
@@ -27,8 +28,7 @@ const Create = () => {
     }
   );
 
-  console.log("Single Vehicle:", singleVehicle);
-
+  // Set formik values on update vehicle
   useEffect(() => {
     if (singleVehicle !== undefined && singleVehicle !== null) {
       formik.setFieldValue("color", singleVehicle?.color);
@@ -39,6 +39,7 @@ const Create = () => {
     }
   }, [singleVehicle]);
 
+  //
   const formik = useFormik({
     initialValues: vehicleInitialValues,
     validationSchema: vehicleValidationSchema,
@@ -85,8 +86,11 @@ const Create = () => {
         {id ? "Update Vehicle" : "Create vehicle"}
       </h2>
       <form onSubmit={formik.handleSubmit}>
+        {/* Category select  */}
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2">Category</label>
+          <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
+            Category
+          </label>
           <select
             name="category"
             value={formik.values.category}
@@ -106,8 +110,11 @@ const Create = () => {
         </div>
         {formik.values.category && (
           <>
+            {/* Color input */}
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Color</label>
+              <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
+                Color
+              </label>
               <input
                 type="text"
                 name="color"
@@ -121,8 +128,11 @@ const Create = () => {
                 </div>
               ) : null}
             </div>
+            {/* Make input */}
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Make</label>
+              <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
+                Make
+              </label>
               <input
                 type="text"
                 name="make"
@@ -136,8 +146,11 @@ const Create = () => {
                 </div>
               ) : null}
             </div>
+            {/* Model input */}
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Model</label>
+              <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
+                Model
+              </label>
               <input
                 type="text"
                 name="model"
@@ -151,8 +164,9 @@ const Create = () => {
                 </div>
               ) : null}
             </div>
+            {/* Registration no input */}
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">
+              <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
                 Registration No
               </label>
               <input
@@ -168,19 +182,22 @@ const Create = () => {
                 </div>
               ) : null}
             </div>
+            {/* Buttons */}
             <div className="flex justify-end space-x-4">
               <button
                 type="button"
                 onClick={handleCancel}
-                className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded"
+                className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded flex items-center space-x-2 uppercase"
               >
-                Cancel
+                <FaTimes />
+                <span>Cancel</span>
               </button>
               <button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded flex items-center space-x-2 uppercase"
               >
-                Save
+                <FaSave />
+                <span>Save</span>
               </button>
             </div>
           </>

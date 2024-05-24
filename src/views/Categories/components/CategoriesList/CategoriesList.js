@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 import DataTable from "react-data-table-component";
+import { toast } from "react-toastify";
 
 import CreateModal from "../CreateModal/CreateModal";
 import { DeleteModal } from "../../../../components";
 import CategoryApi from "../../../../services/apis/Category.Api";
-import { toast } from "react-toastify";
 
 const CategoriesList = ({ data, refetch }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

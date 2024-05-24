@@ -11,7 +11,7 @@ import AuthApi from "../../services/apis/Auth.Api";
 const SignUp = () => {
   const navigate = useNavigate();
 
-  //  SignIn user mutation
+  //  Signup user mutation
   const { mutate: signinUser } = useMutation((body) => AuthApi.signUp(body), {
     onSuccess: (res) => {
       console.log("Signup response :", res);
@@ -26,12 +26,14 @@ const SignUp = () => {
     onError: (error) => toast.error(error.message),
   });
 
+  // Formik
   const formik = useFormik({
     initialValues: singUpInitialValues,
     validationSchema: signUpValidationSchema,
     onSubmit: (values) => handleSubmit(values),
   });
 
+  // Submit method
   const handleSubmit = (values) => {
     signinUser(values);
   };
@@ -48,7 +50,7 @@ const SignUp = () => {
           <div>
             <div className="flex items-center justify-between">
               <label
-                for="username"
+                htmlFor="username"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Username
@@ -58,6 +60,7 @@ const SignUp = () => {
               <input
                 type="text"
                 name="username"
+                id="username"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-3"
                 value={formik.values.username}
                 onChange={formik.handleChange}
@@ -73,7 +76,7 @@ const SignUp = () => {
           {/* Email addresss */}
           <div className="mt-2">
             <label
-              for="email"
+              htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Email address
@@ -82,6 +85,7 @@ const SignUp = () => {
               <input
                 type="email"
                 name="email"
+                id="email"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-3"
                 value={formik.values.email}
                 onChange={formik.handleChange}

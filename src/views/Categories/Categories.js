@@ -1,6 +1,7 @@
 import React from "react";
-import { CategoriesList } from "./components";
 import { useQuery } from "react-query";
+
+import { CategoriesList } from "./components";
 import CategoryApi from "../../services/apis/Category.Api";
 
 const Categories = () => {
