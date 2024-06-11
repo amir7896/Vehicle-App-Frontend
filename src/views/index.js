@@ -7,3 +7,4 @@ export { default as Welcome } from "./Welcome";
 export { default as Categories } from "./Categories";
 export { default as Vehicles } from "./Vehicles";
 export { default as CreateVehicle } from "./CreateVehicle";
+export { default as Footer } from "./Footer";

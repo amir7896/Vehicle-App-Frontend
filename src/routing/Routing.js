@@ -9,6 +9,7 @@ import {
 import {
   Navbar,
   Sidebar,
+  Footer,
   Dashboard,
   Login,
   SignUp,
@@ -120,6 +121,7 @@ const Routing = () => {
             </Routes>
           </div>
         </div>
+        <Footer />
       </div>
     </Router>
   );
