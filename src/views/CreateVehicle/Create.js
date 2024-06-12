@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import { FaSave, FaTimes } from "react-icons/fa";
+import { FaSave, FaTimes, FaTrash } from "react-icons/fa";
 
 import { vehicleValidationSchema } from "../../utils/validations";
 import { vehicleInitialValues } from "../../constants/appConstants";
@@ -14,10 +14,15 @@ const Create = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  // State for image file and preview
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
   // Get categories
   const { data: categories } = useQuery("GET_CATEGORIES", () =>
     CategoryApi.getCategories()
   );
+
   // Get single vehicle
   const { data: singleVehicle } = useQuery(
     ["GET_SINGLE_VEHICLE", id],
@@ -36,17 +41,35 @@ const Create = () => {
       formik.setFieldValue("model", singleVehicle?.model);
       formik.setFieldValue("category", singleVehicle?.category);
       formik.setFieldValue("registrationNo", singleVehicle?.registrationNo);
+      // Load image if available
+      if (singleVehicle.image) {
+        setImagePreview(singleVehicle.image);
+      }
     }
   }, [singleVehicle]);
 
-  //
   const formik = useFormik({
     initialValues: vehicleInitialValues,
     validationSchema: vehicleValidationSchema,
     onSubmit: (values) => handleSubmit(values),
   });
 
-  //  Create and update  vehicle mutation
+  // Handle image file selection
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
+  // Handle image removal
+  const handleRemoveImage = () => {
+    setImageFile(null);
+    setImagePreview(null);
+  };
+
+  // Create and update vehicle mutation
   const { mutate: vehicle } = useMutation(
     (body) => {
       if (id !== null && id !== undefined) {
@@ -71,6 +94,10 @@ const Create = () => {
 
   // Handle submit
   const handleSubmit = (values) => {
+    // Append image file to form data if present
+    if (imageFile) {
+      values.image = imageFile;
+    }
     vehicle(values);
   };
 
@@ -81,12 +108,12 @@ const Create = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow-md">
+    <div className="max-w-md mx-auto mt-10 mb-20 p-6 bg-white rounded shadow-md">
       <h2 className="text-2xl mb-4 uppercase">
         {id ? "Update Vehicle" : "Create vehicle"}
       </h2>
       <form onSubmit={formik.handleSubmit}>
-        {/* Category select  */}
+        {/* Category select */}
         <div className="mb-4">
           <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
             Category
@@ -101,15 +128,50 @@ const Create = () => {
               Select a category
             </option>
             {categories &&
-              categories?.map((category) => (
+              categories.map((category) => (
                 <option key={category._id} value={category._id}>
-                  {category?.categoryName}
+                  {category.categoryName}
                 </option>
               ))}
           </select>
         </div>
         {formik.values.category && (
           <>
+            {/* Image input */}
+
+            <div className="mb-4">
+              {!imageFile && (
+                <>
+                  <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
+                    Image
+                  </label>
+                  <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="w-full px-3 py-2 border rounded"
+                  />
+                </>
+              )}
+
+              {imagePreview && (
+                <div className="mt-4 relative">
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="w-full h-48 object-cover rounded"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleRemoveImage}
+                    className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              )}
+            </div>
             {/* Color input */}
             <div className="mb-4">
               <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
