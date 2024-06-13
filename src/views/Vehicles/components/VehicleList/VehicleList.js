@@ -52,6 +52,18 @@ const VehicleList = ({ data, refetch }) => {
       sortField: "_id",
     },
     {
+      name: "Image",
+      cell: (row) => (
+        <div className="flex items-center space-x-4">
+          <img
+            alt="image"
+            src={row?.image}
+            style={{ objectFit: "cover", width: 50, height: 50 }}
+          />
+        </div>
+      ),
+    },
+    {
       name: "Category",
       selector: (row) => row.category.categoryName,
       sortable: true,
@@ -75,7 +87,6 @@ const VehicleList = ({ data, refetch }) => {
       sortable: true,
       sortField: "make",
     },
-
     {
       name: "Registration No",
       selector: (row) => row.registrationNo,

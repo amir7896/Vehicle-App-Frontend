@@ -72,10 +72,20 @@ const Create = () => {
   // Create and update vehicle mutation
   const { mutate: vehicle } = useMutation(
     (body) => {
+      const formData = new FormData();
+
+      formData.append("category", formik.values.category);
+      formData.append("color", formik.values.color);
+      formData.append("model", formik.values.model);
+      formData.append("make", formik.values.make);
+      formData.append("registrationNo", formik.values.registrationNo);
+      formData.append("image", imageFile);
+
       if (id !== null && id !== undefined) {
         return VehicleApi.updateVehicle(body, id);
       } else {
-        return VehicleApi.createVehicle(body);
+        console.log("formData:", formData);
+        return VehicleApi.createVehicle(formData);
       }
     },
     {
