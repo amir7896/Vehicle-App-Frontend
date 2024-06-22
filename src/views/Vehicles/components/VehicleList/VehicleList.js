@@ -52,6 +52,14 @@ const VehicleList = ({ data, refetch }) => {
       sortField: "_id",
     },
     {
+      name: "Image",
+      cell: (row) => (
+        <div className="flex items-center space-x-4">
+          <img className="w-13 h-14 rounded-lg" alt="Image" src={row.image} />
+        </div>
+      ),
+    },
+    {
       name: "Category",
       selector: (row) => row.category.categoryName,
       sortable: true,

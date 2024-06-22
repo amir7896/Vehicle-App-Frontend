@@ -94,11 +94,18 @@ const Create = () => {
 
   // Handle submit
   const handleSubmit = (values) => {
+    const formData = new FormData();
+    formData.append("color", values.color);
+    formData.append("make", values.make);
+    formData.append("model", values.model);
+    formData.append("category", values.category);
+    formData.append("registrationNo", values.registrationNo);
+    formData.append("image", imageFile);
     // Append image file to form data if present
     if (imageFile) {
       values.image = imageFile;
     }
-    vehicle(values);
+    vehicle(formData);
   };
 
   // Handle cancel
