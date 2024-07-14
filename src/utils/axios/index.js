@@ -1,8 +1,9 @@
 import axios from "axios";
 import LocalStorage from "../../managers/LocalStorage";
 
+const BackendURL= process.env.REACT_APP_BASE_URL
 const api = axios.create({
-  baseURL: "http://localhost:4000/api/",
+  baseURL: `${BackendURL}`,
 });
 
 api.interceptors.request.use(function (config) {
