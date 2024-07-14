@@ -55,11 +55,13 @@ const VehicleList = ({ data, refetch }) => {
       name: "Image",
       cell: (row) => (
         <div className="flex items-center space-x-4">
+
           <img
             alt="image"
             src={row?.image}
             style={{ objectFit: "cover", width: 50, height: 50 }}
           />
+
         </div>
       ),
     },
